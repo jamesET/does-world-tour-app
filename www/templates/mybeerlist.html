@@ -1,0 +1,43 @@
+<ion-view view-title="World of Beer Tour">
+  <ion-content class="main-bg">
+
+    <div class="col text-center">
+        <h5 class="text">{{myBeerList.user.name}} (#{{myBeerList.listNumber}}) - Started {{myBeerList.startDate}}
+        <br>Beers left to finish: {{myBeerList.numberRemaining}}</h5>
+    </div>
+
+    <!-- TODO add progress bar:  <progress max="100" value="80"></progress> -->
+      <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="refresh()">
+      </ion-refresher>
+      <ion-list can-swipe="true">
+        <div ng-repeat="group in groupedList">
+        <ion-item class="item-text-wrap item-dark" ng-click=toggleGroup(group) ng-class="{active: isGroupShown(group)}">
+          <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'">&nbsp</i>
+          {{group.country}}
+        </ion-item>
+        <ion-item ng-show="isGroupShown(group)" class="item-text-wrap item-dark" ng-repeat="listBeer in group.beers">
+          <div class="row">
+              <div class="col col-66">
+                <b>{{listBeer.beer.name}}</b><br>
+                {{listBeer.beer.brewery}}<br>
+                {{listBeer.beer.country}} {{listBeer.beer.region}}
+              </div>
+              <div class="col col-33">{{listBeer.beer.style}}<br>
+                {{listBeer.beer.abv}}% abv<br>
+                {{listBeer.beer.oz}} oz
+              </div>
+          </div>
+          <ion-option-button
+            class="button-positive button-large"
+            ng-click="drinkBeer(myBeerList.id,listBeer.id)">
+            Drink<i class="icon ion-beer padding"></i>
+            </ion-option-button>
+      </ion-item>
+      </div>
+      </ion-list>
+
+
+  </ion-content>
+</ion-view>

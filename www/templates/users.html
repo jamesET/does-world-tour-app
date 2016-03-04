@@ -1,0 +1,21 @@
+<ion-view view-title="Users">
+  <ion-content class="main-bg">
+
+      <ion-list>
+        <ion-item class="item-text-wrap item-dark" ng-repeat="user in users">
+          <div class="row">
+              <div class="col">
+                <b>{{user.name}}</b>
+                <br>
+                {{user.nickName}}
+              </div>
+              <div class="col">
+                {{user.role}}
+              </div>
+          </div>
+          <ion-option-button class="button-positive button-large" ng-click="openModal(user)">Edit</ion-option-button>
+        </ion-item>
+      </ion-list>
+
+  </ion-content>
+</ion-view>

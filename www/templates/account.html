@@ -1,0 +1,35 @@
+<ion-view view-title="My Account">
+  <ion-content class="main-bg">
+    <form novalidate="novalidate" ng-submit="accountUpdate()">
+    <div class="list">
+    <label class="item item-input">
+      <span class="input-label">Email</span>
+      <input type="email" ng-model="accountData.email" ng-disabled="true" required="required" placeholder="you@yourmail.com">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Password</span>
+      <input type="password" ng-model="accountData.password" required="required" placeholder="not set">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Re-enter password</span>
+      <input type="password" ng-model="accountData.password2" required="required" placeholder="not set">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Name</span>
+      <input type="text" ng-model="accountData.name" required="required" placeholder="Your full name">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Nickname</span>
+      <input type="text" ng-model="accountData.nickName" placeholder="not set">
+    </label>
+    <label class="item">
+      <button class="button button-block button-balanced" type="submit">Save</button>
+    </label>
+    </div>
+  </form>
+
+    uid: {{session.getUser()}}
+    role: {{session.getRole()}}
+
+  </ion-content>
+</ion-view>
