@@ -17,7 +17,10 @@
           <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'">&nbsp</i>
           {{group.country}}
         </ion-item>
-        <ion-item ng-show="isGroupShown(group)" class="item-text-wrap item-dark" ng-repeat="listBeer in group.beers">
+        <ion-item ng-show="isGroupShown(group)"
+          class="item-text-wrap item-dark item-accordion"
+          ng-repeat="listBeer in group.beers"
+          item-height="300px" item-width="100%">
           <div class="row">
               <div class="col col-66">
                 <b>{{listBeer.beer.name}}</b><br>

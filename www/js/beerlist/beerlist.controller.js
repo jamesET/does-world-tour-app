@@ -11,7 +11,7 @@
     function BeerListController($scope,BeerListService,logger,$cordovaGeolocation) {
         var vm = this;
         $scope.myBeerList = {};
-        $scope.groupedList = {};
+        $scope.groupedList = [];
         $scope.refresh = refresh;
         $scope.drinkBeer = drinkBeer;
         $scope.toggleGroup = toggleGroup;
@@ -126,23 +126,39 @@
 
         // Take beerlist and group them by country for view
         function getGroupedBeerList(drinkList) {
-          var groupedBeerList = {};
+          var countries = {};
+          var countryGroups = [];
+
           for (var id in drinkList) {
               var country = drinkList[id].beer.country;
               var beer = drinkList[id].beer;
 
-              var countryGroup = groupedBeerList[country];
-              if (!countryGroup) {
+              // Add new country if needed
+              var countryIndex = countries[country];
+              if (!countryIndex && countryIndex != 0 ) {
                   countryGroup = {
                       country : country,
                       beers : [],
                       show : false
                   };
+                  countryIndex = countryGroups.push(countryGroup) - 1;
+                  countries[country] = countryIndex;
               }
+
+              // Add beer to country
+              var countryGroup = countryGroups[countryIndex];
               countryGroup.beers.push(drinkList[id]);
-              groupedBeerList[country] = countryGroup;
+              countryGroups[countryIndex] = countryGroup;
           }
-          return groupedBeerList;
+
+          countryGroups.sort(
+            function(a,b){
+              var c1 = a.country;
+              var c2 = b.country;
+              return c1.localeCompare(c2);
+            }
+          );
+          return countryGroups;
         }
 
         function toggleGroup(group) {
