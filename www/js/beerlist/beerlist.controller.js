@@ -42,7 +42,6 @@
             BeerListService.getBeerList()
               .then(function(beerlist){
                 $scope.myBeerList = beerlist.data;
-                $scope.groupedList = null;
                 $scope.groupedList = getGroupedBeerList($scope.myBeerList.drinkList);
               })
               .finally(function(){
@@ -56,7 +55,7 @@
             .then(processDrink,locationUnavailable);
 
           function processDrink() {
-            // vm.isAtDoes = true;  // just for testing
+             vm.isAtDoes = true;  // just for testing
             if (vm.isAtDoes) {
               BeerListService.drinkBeer(listId,beerOnListId)
                 .then(function() {
