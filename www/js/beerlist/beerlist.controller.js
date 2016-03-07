@@ -49,17 +49,18 @@
               });
         }
 
-        function drinkBeer(listId,beerOnListId) {
+        function drinkBeer(listId, countryGroup, listBeer) {
 
           ifInRangeOfDoes()
             .then(processDrink,locationUnavailable);
 
           function processDrink() {
-             vm.isAtDoes = true;  // just for testing
+             //vm.isAtDoes = true;  // just for testing
             if (vm.isAtDoes) {
-              BeerListService.drinkBeer(listId,beerOnListId)
+              BeerListService.drinkBeer(listId,listBeer.id)
                 .then(function() {
-                    $scope.refresh();
+                    // $scope.refresh();
+                    removeBeer(countryGroup,listBeer);
                   });
             } else {
               logger.info('You must be at Doe\'s Bentonville to drink','','Not at Doe\'s');
@@ -166,6 +167,27 @@
 
         function isGroupShown(group) {
           return group.show;
+        }
+
+        function removeBeer(countryGroup,listBeer) {
+          var removed = false;
+          var beerIndex = -1;
+          var countryIndex = $scope.groupedList.indexOf(countryGroup);
+          if (countryIndex >= 0) {
+              beerIndex = countryGroup.beers.indexOf(listBeer);
+          }
+          // remove beer
+          if (beerIndex >= 0) {
+              console.log("Removing beer: " + listBeer.name);
+              countryGroup.beers.splice(beerIndex,1);
+          }
+
+          // remove country if no more beers
+          if (countryGroup.beers.length == 0) {
+              console.log("Removing country: " + countryGroup.country);
+              $scope.groupedList.splice(countryIndex,1);
+          }
+
         }
 
 
