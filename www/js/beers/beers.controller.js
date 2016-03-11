@@ -5,10 +5,10 @@
       .module('app.beers')
       .controller('BeersController', BeersController );
 
-  BeersController.$inject = ['$scope','$ionicModal','BeerService','beersPrepService'];
-  function BeersController ($scope,$ionicModal,BeerService,beersPrepService) {
+  BeersController.$inject = ['$scope','$ionicModal','BeerService'];
+  function BeersController ($scope,$ionicModal,BeerService) {
 
-    $scope.allBeers = beersPrepService.data.beers;
+    $scope.allBeers = {};
     $scope.beer = {};
 
     $scope.closeModal = closeModal;
@@ -30,20 +30,29 @@
       $scope.$on('$destroy', function() {
         $scope.modal.remove();
       });
+
+      // initially load a copy of beers from file, we might be off the network
+      BeerService.loadStaticBeersCache();
+
+      refresh();
     }
 
     function refresh() {
         BeerService.getBeers()
-          .then(function(response){
-            if (response && response.data) {
-              $scope.allBeers = response.data.beers;
-            } else {
-              $scope.allBeers = {};
-            }
-          })
+          .then(getBeersComplete,getBeersFailed)
           .finally(function(){
                 $scope.$broadcast('scroll.refreshComplete');
           });
+
+          function getBeersComplete(response) {
+            if (response) {
+              $scope.allBeers = response.beers;
+            }
+          }
+
+          function getBeersFailed(reason) {
+            conole.log("geetBeefsFailed " + reason);
+          }
     }
 
     function openModal(targetBeer) {

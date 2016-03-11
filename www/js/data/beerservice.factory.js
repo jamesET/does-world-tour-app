@@ -5,25 +5,48 @@
       .module('beers.service',['app.core'])
       .factory('BeerService', BeerService );
 
-      BeerService.$inject = ['$http','$q','ENV','logger','exception'];
+      BeerService.$inject = ['$http','$q','ENV','logger','exception','$localStorage'];
 
-      function BeerService($http,$q,ENV,logger,exception) {
+      function BeerService($http,$q,ENV,logger,exception,$localStorage) {
         var service = {
           getBeers : getBeers,
+          loadStaticBeersCache: loadStaticBeersCache,
           update : update,
           add : add
         };
         return service;
 
+        // get all beers from the server
         function getBeers() {
           var beersUrl = ENV.apiEndpoint + 'beers/browse';
           return $http.get(beersUrl)
-            .then(getBeersComplete)
-            .catch(exception.catcher('Retrieve Beers failed.'));
+            .then(getBeersComplete,getBeersFailed)
 
-            function getBeersComplete(data) {
-                return data;
+            function getBeersComplete(response) {
+                // save a local copy of last response
+                $localStorage.setObject('beersCache',response.data);
+                return response.data;
             }
+
+            function getBeersFailed(reason) {
+              var beersCache = $localStorage.getObject('beersCache');
+              if (Object.keys(beersCache).length) {
+                return beersCache;
+              } else {
+                beersCache = {};
+                return beersCache;
+              }
+            }
+        }
+
+        // This method will populate the beers cache using static data.
+        // This will make the browse beer function more reliable
+        // when the network is unavailable
+        function loadStaticBeersCache() {
+          var beersCache = $http.get('static-beers.json')
+            .then(function(response) {
+              $localStorage.setObject('beersCache',response.data);
+            });
         }
 
         function update(beer) {
