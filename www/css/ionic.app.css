@@ -56,6 +56,23 @@ $dark:                            #444 !default;
 .list .item.item-accordion.ng-hide-remove {
   display: block !important; }
 
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 250px;
+  height: 20px; }
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; }
+
+progress[value]::-webkit-progress-value {
+  background-color: #C41E3A;
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

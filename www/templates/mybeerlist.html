@@ -4,9 +4,10 @@
     <div class="col text-center">
         <h5 class="text">{{myBeerList.user.name}} (#{{myBeerList.listNumber}}) - Started {{myBeerList.startDate}}
         <br>Beers left to finish: {{myBeerList.numberRemaining}}</h5>
+        <progress max="100" value="{{myBeerList.listProgressPct}}"></progress> 
     </div>
 
-    <!-- TODO add progress bar:  <progress max="100" value="80"></progress> -->
+
       <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="refresh()">
