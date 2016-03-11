@@ -4,7 +4,16 @@
     <div class="col text-center">
         <h5 class="text">{{myBeerList.user.name}} (#{{myBeerList.listNumber}}) - Started {{myBeerList.startDate}}
         <br>Beers left to finish: {{myBeerList.numberRemaining}}</h5>
-        <progress max="100" value="{{myBeerList.listProgressPct}}"></progress> 
+        <!-- <progress max="100" value="{{myBeerList.listProgressPct}}"></progress> -->
+    </div>
+
+    <div class="col text-center>">
+        <div id="myProgress">
+          <div id="myProgressBar" style="width: {{myBeerList.listProgressPct}}%">
+            <div id="label" class="text-right">
+              {{myBeerList.listProgressPct|number:2}}%
+            </div>
+        </div>
     </div>
 
 
@@ -19,7 +28,7 @@
             {{group.country}}
           </ion-item>
           <ion-item ng-show="isGroupShown(group)"
-            class="item-text-wrap item-dark item-accordion"
+            class="item-text-wrap item-dark"
             ng-repeat="listBeer in group.beers track by listBeer.id"
             item-height="300px" item-width="100%">
             <div class="row">
