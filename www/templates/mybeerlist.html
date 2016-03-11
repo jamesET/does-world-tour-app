@@ -1,12 +1,18 @@
 <ion-view view-title="World of Beer Tour">
   <ion-content class="main-bg">
 
-    <div class="col text-center">
-        <h5 class="text">{{myBeerList.user.name}} (#{{myBeerList.listNumber}}) - Started {{myBeerList.startDate}}
-        <br>Beers left to finish: {{myBeerList.numberRemaining}}</h5>
-        <!-- <progress max="100" value="{{myBeerList.listProgressPct}}"></progress> -->
+    <div class="col h5 text-center">
+        <ul>
+          <li>{{myBeerList.user.name}}</li>
+          <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate}}</li>
+          <li>Completed {{myBeerList.numberOrderedOnList}} of {{myBeerList.totalBeersOnList}}
+            <span ng-show="myBeerList.numberNotConfirmed > 0">
+              ({{myBeerList.numberNotConfirmed}} pending)</span>
+          </li>
+        </ul>
     </div>
 
+    <p>
     <div class="col text-center>">
         <div id="myProgress">
           <div id="myProgressBar" style="width: {{myBeerList.listProgressPct}}%">
@@ -15,7 +21,7 @@
             </div>
         </div>
     </div>
-
+    </p>
 
       <ion-refresher
         pulling-text="Pull to refresh..."
