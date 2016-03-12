@@ -109,13 +109,19 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
         email : $scope.acctData.email,
         name : $scope.acctData.name,
         password : $scope.acctData.password,
-        nickName : $scope.acctData.nickName
+        nickName : $scope.acctData.nickName,
+        numListsCompleted : $scope.acctData.listNbr
     };
 
     var password2 = $scope.acctData.password2;
     if (newUser.password !== password2) {
         $scope.errorMessage = 'passwords do not match, please re-enter password';
         return;
+    }
+
+    if (newUser.numListsCompleted < 1 || newUser.numListsCompleted > 30) {
+      $scope.errorMessage = 'invalid number of lists finished';
+      return;
     }
 
     UserService.signup(newUser)
