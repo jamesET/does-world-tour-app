@@ -1,7 +1,7 @@
 <ion-view view-title="World of Beer Tour">
   <ion-content class="main-bg">
 
-    <div class="col h5 text-center">
+    <div class="col text-center beer-list-header">
         <ul>
           <li>{{myBeerList.user.name}}</li>
           <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate}}</li>
@@ -34,14 +34,14 @@
             {{group.country}}
           </ion-item>
           <ion-item ng-show="isGroupShown(group)"
-            class="item-text-wrap item-dark"
+            class="item-text-wrap item-beer"
             ng-repeat="listBeer in group.beers track by listBeer.id"
             item-height="300px" item-width="100%">
             <div class="row">
                 <div class="col col-66">
                   <b>{{::listBeer.beer.name}}</b><br>
                   {{::listBeer.beer.brewery}}<br>
-                  {{::listBeer.beer.country}} {{::listBeer.beer.region}}
+                  {{::listBeer.beer.country}} / {{::listBeer.beer.region}}
                 </div>
                 <div class="col col-33">{{::listBeer.beer.style}}<br>
                   {{::listBeer.beer.abv}}% abv<br>
