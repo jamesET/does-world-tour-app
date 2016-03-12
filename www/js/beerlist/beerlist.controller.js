@@ -59,8 +59,8 @@
             if (vm.isAtDoes) {
               BeerListService.drinkBeer(listId,listBeer.id)
                 .then(function() {
-                    // $scope.refresh();
                     removeBeer(countryGroup,listBeer);
+                    $scope.refresh();
                   });
             } else {
               logger.info('You must be at Doe\'s Bentonville to drink','','Not at Doe\'s');

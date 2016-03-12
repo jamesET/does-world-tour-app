@@ -74,6 +74,16 @@
             }
         })
 
+        .state('app.activities', {
+            url: '/activities',
+            views: {
+              'menuContent': {
+                templateUrl: 'templates/activities.html',
+                controller: 'ActivitiesController'
+              }
+            }
+        })
+
         .state('app.completeBeers', {
             url: '/completeBeers',
             views: {

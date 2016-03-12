@@ -17,7 +17,8 @@
           'app.verifybeer',
           'app.users',
           'app.beerlists',
-          'app.account'
+          'app.account',
+          'app.activities'
         ])
         .run(runBlock);
 
