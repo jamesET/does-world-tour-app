@@ -20,12 +20,19 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 $cardinal:                   #C41E3A !default;
 
-$horn-bg:                     '../img/DrinkingHorn.jpg';
+$horn-bg:       '../img/DrinkingHorn.jpg';
 $shots-bg:      '../img/shots.jpg';
+
+.start-bg {
+  background: url($shots-bg) no-repeat center center fixed;
+  background-color: black;
+  background-size: cover;
+}
 
 .main-bg {
   background-color: $cardinal;
 }
+
 
 .item.item-beer {
   border-color: #111;
@@ -56,10 +63,7 @@ $shots-bg:      '../img/shots.jpg';
     width: 55%;
 }
 
-.start-bg {
-  background: url($shots-bg) no-repeat center center fixed;
-  background-size: cover;
-}
+
 
 .icon-bg {
     color: white;

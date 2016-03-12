@@ -15,6 +15,11 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+.start-bg {
+  background: url("../img/shots.jpg") no-repeat center center fixed;
+  background-color: black;
+  background-size: cover; }
+
 .main-bg {
   background-color: #C41E3A; }
 
@@ -42,10 +47,6 @@ $dark:                            #444 !default;
   padding: 0.5em;
   background-origin: content-box;
   width: 55%; }
-
-.start-bg {
-  background: url("../img/shots.jpg") no-repeat center center fixed;
-  background-size: cover; }
 
 .icon-bg {
   color: white;
