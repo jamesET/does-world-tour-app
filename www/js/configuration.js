@@ -2,7 +2,7 @@
 
  angular.module('config', [])
 
-//.constant('ENV', {name:'development',apiEndpoint:'http://localhost:8080/'})
+.constant('ENV', {name:'development',apiEndpoint:'http://localhost:8080/'})
 //.constant('ENV', {name:'development',apiEndpoint:'http://jamess-air:8080/'})
-.constant('ENV', {name:'production',apiEndpoint:'https://www.mondoes.club/'})
+//.constant('ENV', {name:'production',apiEndpoint:'https://www.mondoes.club/'})
 ;
