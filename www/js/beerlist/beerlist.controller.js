@@ -55,12 +55,16 @@
             .then(processDrink,locationUnavailable);
 
           function processDrink() {
-             //vm.isAtDoes = true;  // just for testing
+            //vm.isAtDoes = true;  // just for testing
             if (vm.isAtDoes) {
               BeerListService.drinkBeer(listId,listBeer.id)
                 .then(function() {
                     removeBeer(countryGroup,listBeer);
-                    $scope.refresh();
+                    var ordered = $scope.myBeerList.numberOrderedOnList + 1;
+                    $scope.myBeerList.numberOrderedOnList = ordered;
+                    $scope.myBeerList.listProgressPct =
+                      updateProgress($scope.myBeerList.numberOrderedOnList,
+                        $scope.myBeerList.totalBeersOnList);
                   });
             } else {
               logger.info('You must be at Doe\'s Bentonville to drink','','Not at Doe\'s');
@@ -188,6 +192,14 @@
               $scope.groupedList.splice(countryIndex,1);
           }
 
+        }
+
+        function updateProgress(ordered,totalbeers) {
+          if (totalbeers > 0) {
+              return (ordered / totalbeers) * 100;
+          } else {
+            return 0.0;
+          }
         }
 
 
