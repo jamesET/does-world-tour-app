@@ -12,7 +12,7 @@
           <div class="col col-60">
                 <ul>
                   <li><b>{{activity.name}}</b></li>
-                  <li class="small-text"> {{activity.time}}</li>
+                  <li class="small-text"> {{activity.time | date: 'hh:mm a EEE, MMM d, yyyy' }}</li>
                   <li class="small-text">{{activity.listProgressPct | number:0}}% through list #{{activity.listNbr}}</li>
                 </ul>
           </div>

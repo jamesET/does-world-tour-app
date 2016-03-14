@@ -4,7 +4,7 @@
     <div class="col text-center beer-list-header">
         <ul>
           <li>{{myBeerList.user.name}}</li>
-          <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate}}</li>
+          <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate | date: 'MMM d, yyyy'}}</li>
           <li>Completed {{myBeerList.numberOrderedOnList}} of {{myBeerList.totalBeersOnList}}
             <span ng-show="myBeerList.numberNotConfirmed > 0">
               ({{myBeerList.numberNotConfirmed}} pending)</span>

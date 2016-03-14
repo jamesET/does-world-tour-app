@@ -2,9 +2,11 @@
   <ion-content class="main-bg">
 
       <ion-list can-swipe="true">
-        <ion-item class="item-dark" ng-repeat="item in drinksToVerify">
+        <ion-item class="item-dark item-text-wrap" ng-repeat="item in drinksToVerify">
           <div class="row">
-              <div class="col">{{item.beer.orderedDate}}</div>
+              <div class="col">
+                {{item.beer.orderedDate | date: 'hh:mm a EEE, MMM d, yyyy'}}
+              </div>
               <div class="col">
                 {{item.user.name}}<br>
                 {{item.beer.beer.name}}
