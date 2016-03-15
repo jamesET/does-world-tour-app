@@ -22,11 +22,15 @@
         function signup(newUser) {
           var signupUrl = ENV.apiEndpoint + 'users/signup/';
           return $http.post(signupUrl,newUser)
-            .then(signupComplete())
+            .then(signupComplete, signupFailed)
             .catch(exception.catcher);
 
           function signupComplete(data) {
             return data;
+          }
+
+          function signupFailed(data) {
+            logger.error(data.message,data.status,"Signup Failed")
           }
         }
 

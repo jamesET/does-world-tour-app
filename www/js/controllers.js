@@ -93,7 +93,7 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
 
 })
 
-.controller('JoinCtrl', function($scope,$state,session,UserService) {
+.controller('JoinCtrl', function($scope,$state,session,UserService,exception) {
 
   $scope.acctData = { };
   $scope.errorMessage = '';
@@ -125,15 +125,19 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
     }
 
     UserService.signup(newUser)
-      .then(function(response){
-          // success, go login for the first time
-          session.setEmail(newUser.email);
-          $state.go('login');
-      },
-      function(response){
-          $scope.errorMessage = response.data.message;
+      .then(signupComplete,signupFailed)
+      .catch(exception.catcher);
+
+      function signupComplete(response) {
+          if (response) {
+            session.setEmail(newUser.email);
+            $state.go('login');
+          }
       }
-    );
+
+      function signupFailed(response) {
+          var nothing = true;
+      }
 
   };
 
