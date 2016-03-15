@@ -110,7 +110,7 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
         name : $scope.acctData.name,
         password : $scope.acctData.password,
         nickName : $scope.acctData.nickName,
-        numListsCompleted : $scope.acctData.listNbr
+        numListsCompleted : parseInt($scope.acctData.listNbr)
     };
 
     var password2 = $scope.acctData.password2;
@@ -120,7 +120,7 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
     }
 
     if (newUser.numListsCompleted < 1 || newUser.numListsCompleted > 30) {
-      $scope.errorMessage = 'invalid number of lists finished';
+      $scope.errorMessage = 'Lists finished must be between 1 and 30';
       return;
     }
 
