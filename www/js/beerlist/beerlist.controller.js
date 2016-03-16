@@ -17,6 +17,7 @@
         $scope.toggleGroup = toggleGroup;
         $scope.isGroupShown = isGroupShown;
         $scope.getGroupedBeerList = getGroupedBeerList;
+        $scope.showBeer = showBeer;
         vm.ifInRangeOfDoes = ifInRangeOfDoes;
         vm.isAtDoes = false;
 
@@ -47,6 +48,10 @@
               .finally(function(){
                     $scope.$broadcast('scroll.refreshComplete');
               });
+        }
+
+        function showBeer(beer) {
+          return !beer.discontinued;
         }
 
         function drinkBeer(listId, countryGroup, listBeer) {

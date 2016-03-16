@@ -8,6 +8,8 @@
                 {{item.beer.orderedDate | date: 'hh:mm a EEE, MMM d, yyyy'}}
               </div>
               <div class="col">
+                <span ng-show="item.beer.beer.outOfStock"><b>This beer is out of stock!</b><br></span>
+                <span ng-show="item.beer.beer.discontinued"><b>This beer is discontinued!</b><br></span>
                 {{item.user.name}}<br>
                 {{item.beer.beer.name}}
               </div>

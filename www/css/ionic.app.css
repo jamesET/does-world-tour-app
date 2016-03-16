@@ -26,7 +26,25 @@ $dark:                            #444 !default;
 .item.item-beer {
   border-color: #111;
   background-color: white;
-  color: black; }
+  color: black;
+  overflow: visible;
+  white-space: normal; }
+
+.item.item-beer-out {
+  font-style: italic;
+  border-color: #111;
+  background-color: white;
+  color: gray;
+  overflow: visible;
+  white-space: normal; }
+
+.item.item-beer-discontinued {
+  font-style: italic;
+  border-color: #111;
+  background-color: white;
+  color: red;
+  overflow: visible;
+  white-space: normal; }
 
 .item .item-content {
   background-color: transparent !important; }

@@ -15,9 +15,18 @@
     </ion-refresher>
 
     <ion-list>
-        <ion-item class="item-text-wrap item-beer" ng-repeat="beer in allBeers">
+        <ion-item
+          ng-repeat="beer in allBeers"
+          ng-show="showBeer(beer)"
+          ng-class="{
+            'item-beer' : true,
+            'item-beer-out' : beer.outOfStock,
+            'item-beer-discontinued' : beer.discontinued
+          }">
           <div class="row">
               <div class="col col-66">
+                <span ng-show="beer.outOfStock">Temporarily Out of Stock<br></span>
+                <span ng-show="beer.discontinued">DISCONTINUED<br></span>
                 <b>{{beer.name}}</b><br>
                 {{beer.brewery}}<br>
                 {{beer.country}} {{beer.region}}

@@ -5,8 +5,8 @@
       .module('app.beers')
       .controller('BeersController', BeersController );
 
-  BeersController.$inject = ['$scope','$ionicModal','BeerService'];
-  function BeersController ($scope,$ionicModal,BeerService) {
+  BeersController.$inject = ['$scope','$ionicModal','BeerService','auth'];
+  function BeersController ($scope,$ionicModal,BeerService,auth) {
 
     $scope.allBeers = {};
     $scope.beer = {};
@@ -15,6 +15,7 @@
     $scope.openModal = openModal;
     $scope.refresh = refresh;
     $scope.save = save;
+    $scope.showBeer = showBeer;
 
     activate();
 
@@ -51,8 +52,17 @@
           }
 
           function getBeersFailed(reason) {
-            conole.log("geetBeefsFailed " + reason);
+            conole.log("geetBeersFailed " + reason);
           }
+    }
+
+    function showBeer(beer) {
+      if (auth.isAdmin()) {
+        // admins should see every beer in database
+        return true;
+      }
+      // for everyone else, hide if discontinued
+      return !(beer.discontinued);
     }
 
     function openModal(targetBeer) {
