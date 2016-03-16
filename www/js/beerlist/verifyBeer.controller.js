@@ -14,10 +14,13 @@
         $scope.refresh = refresh;
         $scope.verifyBeer = verifyBeer;
         $scope.rejectBeer = rejectBeer;
+        $scope.verifyAll = verifyAll;
+        $scope.isListEmpty = true;
 
         $scope.refresh();
 
         $scope.$on('$ionicView.enter', function(e) {
+            $scope.istListEmpty = true;
             $scope.refresh();
             vm.autoRefresh = $interval(refresh,10000);
         } );
@@ -32,6 +35,9 @@
               .then(function(response){
                 $scope.drinksToVerify = response.data.beers;
                 logger.log('getDrinksToVerify refreshed. ');
+                if (countProperties($scope.drinksToVerify) > 0) {
+                    $scope.isListEmpty = false;
+                }
               });
         }
 
@@ -42,11 +48,22 @@
             });
         }
 
+        function verifyAll() {
+          BeerListService.verifyAll()
+            .then(function() {
+                $scope.refresh();
+            });
+        }
+
         function rejectBeer(listId,beerOnListId) {
           BeerListService.rejectBeer(listId,beerOnListId)
             .then(function() {
                 $scope.refresh();
             });
+        }
+
+        function countProperties(obj) {
+          return Object.keys(obj).length;
         }
 
     }

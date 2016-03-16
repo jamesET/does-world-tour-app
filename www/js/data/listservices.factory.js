@@ -14,7 +14,8 @@
             drinkBeer: drinkBeer,
             getDrinksToVerify: getDrinksToVerify,
             verifyBeer: verifyBeer,
-            rejectBeer: rejectBeer
+            rejectBeer: rejectBeer,
+            verifyAll: verifyAll
         };
 
         return service;
@@ -49,6 +50,22 @@
           function verifyBeerComplete(data) {
             return data;
           }
+        }
+
+        function verifyAll() {
+          var drinkUrl = ENV.apiEndpoint + '/beerlists/completeAll';
+          return $http.post(drinkUrl)
+            .then(verifyAllSuccess,verifyAllFailed)
+            .catch(exception.catcher('Oops! Please try again.'));
+
+            function verifyAllSuccess(response) {
+              return response.data;
+            }
+
+            function verifyAllFailed(response) {
+              logger.error(response.data.message,response.status,"Updates Failed")
+            }
+
         }
 
         function rejectBeer(listId,beerOnListId) {

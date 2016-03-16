@@ -1,6 +1,20 @@
 <ion-view view-title="Confirm Beers Drank">
   <ion-content class="main-bg">
 
+    <div id="confirmAll" ng-show="!isListEmpty" class="row">
+      <div class="col text-right main-bg">
+      <button class="button button-block button-assertive" ng-click="verifyAll()">
+        Verify All
+      </button>
+      </div>
+    </div>
+
+    <div id="nothingToSee" ng-show="isListEmpty" class="row">
+        <div class="col text-center h2">
+          <br>Relax, there's nothing to confirm.
+        </div>
+    </div>
+
       <ion-list can-swipe="true">
         <ion-item class="item-dark item-text-wrap" ng-repeat="item in drinksToVerify">
           <div class="row">
