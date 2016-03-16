@@ -29,8 +29,8 @@
             return data;
           }
 
-          function signupFailed(data) {
-            logger.error(data.message,data.status,"Signup Failed")
+          function signupFailed(response) {
+            logger.error(response.data.message,response.status,"Signup Failed")
           }
         }
 
