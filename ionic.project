@@ -1,5 +1,5 @@
 {
-  "name": "myApp",
+  "name": "Beer Tour",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",
