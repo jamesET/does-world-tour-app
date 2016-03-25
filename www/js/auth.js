@@ -13,9 +13,11 @@
         this.logOut = logOut;
         this.isAuthenticated = isAuthenticated;
         this.isAdmin = isAdmin;
+        this.sendPassword = sendPassword;
 
         var baseUrl = ENV.apiEndpoint;
         var loginUrl = baseUrl + '/login/';
+        var sendPasswordUrl = baseUrl + '/login/sendpass';
         var logoutUrl =  baseUrl + '/logout/';
         var isAuthenticated = false;
 
@@ -62,6 +64,21 @@
             function logOutComplete() {
                 logger.log('User logged out');
             }
+        }
+
+        function sendPassword(email) {
+          return $http({
+            method: 'POST',
+            url: sendPasswordUrl,
+            params: { email : email }
+          })
+          .then(sendSuccess)
+          .catch( exception.catcher('Send password failed'));
+
+            function sendSuccess(response) {
+              // do nothing
+            }
+
         }
 
         function isAuthenticated() {

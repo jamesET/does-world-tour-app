@@ -37,11 +37,13 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
   };
 })
 
-.controller('LoginCtrl', function($scope,$state,session,auth) {
+.controller('LoginCtrl', function($scope,$state,session,auth,logger,$ionicLoading) {
   var vm = this;
   vm.activate = activate;
   vm.clearFormData = clearFormData;
   vm.restoreFormData = restoreFormData;
+  vm.showLoading = showLoading;
+  vm.hideLoading = hideLoading;
 
   activate();
 
@@ -89,6 +91,31 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
             $state.go('app.mybeerlist');
           }
       }
+  }
+
+
+  $scope.forgotPassword = function(email) {
+    console.log('forgotPassword ' + email);
+
+    showLoading();
+    auth.sendPassword(email)
+      .then(sendComplete,sendFailed)
+      .finally(hideLoading)
+
+    function sendComplete(response) {
+        hideLoading();
+        logger.info('Password sent to email',email,'Forgot Password');
+    }
+  }
+
+  function showLoading() {
+    $ionicLoading.show({
+      template: '<h1>Emailing password.  Please wait ...</h1>'
+    });
+  }
+
+  function hideLoading(){
+    $ionicLoading.hide();
   }
 
 })
