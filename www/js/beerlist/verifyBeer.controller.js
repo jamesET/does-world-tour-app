@@ -31,21 +31,21 @@
         });
 
         // When redirected on 401, the interval was still firing
-        $scope.$on(AUTH_EVENTS.notAuthenticated,handleNoAuth);
-        function handleNoAuth() {
+        $scope.$on(AUTH_EVENTS.notAuthenticated, function(e) {
           $interval.cancel(vm.autoRefresh);
-        }
+        });
 
         function refresh() {
             BeerListService.getDrinksToVerify()
-              .then(function(getSuccess,getFail){
-              });
+              .then(getSuccess,getFail);
 
             function getSuccess(response) {
                 $scope.drinksToVerify = response.data.beers;
                 logger.log('getDrinksToVerify refreshed. ');
                 if (countProperties($scope.drinksToVerify) > 0) {
                     $scope.isListEmpty = false;
+                } else {
+                  $scope.isListEmpty = true;
                 }
             }
 
