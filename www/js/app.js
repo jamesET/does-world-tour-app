@@ -23,8 +23,8 @@
         .run(runBlock);
 
 
-    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','AUTH_EVENTS','auth'];
-    function runBlock($ionicPlatform,$rootScope,$state,AUTH_EVENTS,auth) {
+    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','AUTH_EVENTS','auth','logger','$timeout'];
+    function runBlock($ionicPlatform,$rootScope,$state,AUTH_EVENTS,auth,logger,$timeout) {
 
         $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -50,6 +50,19 @@
               }
           }
         });
+
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated,handleNoAuth);
+        function handleNoAuth() {
+            event.preventDefault();
+            $timeout(
+              function() {logger.warning('<h2>Logged out due to inactivity</h2>','','');},
+              1000
+            );
+            $timeout(
+              function() { $state.go('login')},
+              1500);
+
+        }
 
     }
 

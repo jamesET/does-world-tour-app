@@ -5,10 +5,10 @@
         .module('app.verifybeer')
         .controller('VerifyListController', VerifyListController);
 
-    VerifyListController.$inject = ['$scope','$interval','BeerListService','logger'];
+    VerifyListController.$inject = ['$scope','$interval','BeerListService','logger','AUTH_EVENTS'];
 
     /* @ngInject */
-    function VerifyListController($scope,$interval,BeerListService,logger) {
+    function VerifyListController($scope,$interval,BeerListService,logger,AUTH_EVENTS) {
         var vm = this;
         $scope.drinksToVerify = {};
         $scope.refresh = refresh;
@@ -30,15 +30,29 @@
             vm.autoRefresh = null;
         });
 
+        // When redirected on 401, the interval was still firing
+        $scope.$on(AUTH_EVENTS.notAuthenticated,handleNoAuth);
+        function handleNoAuth() {
+          $interval.cancel(vm.autoRefresh);
+        }
+
         function refresh() {
             BeerListService.getDrinksToVerify()
-              .then(function(response){
+              .then(function(getSuccess,getFail){
+              });
+
+            function getSuccess(response) {
                 $scope.drinksToVerify = response.data.beers;
                 logger.log('getDrinksToVerify refreshed. ');
                 if (countProperties($scope.drinksToVerify) > 0) {
                     $scope.isListEmpty = false;
                 }
-              });
+            }
+
+            function getFail(response){
+                $interval.cancel(vm.autoRefresh);
+            }
+
         }
 
         function verifyBeer(listId,beerOnListId) {
