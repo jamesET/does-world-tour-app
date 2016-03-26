@@ -86,14 +86,14 @@
           var posOptions = {
               timeout: 10000,
               enableHighAccuracy: false,
-              maximumAge: (30*60*1000) };
+              maximumAge: (2*60*1000) };
             return $cordovaGeolocation
               .getCurrentPosition(posOptions)
               .then(positionFound,positionError);
 
             function positionFound(position) {
-              var lat  = position.coords.latitude
-              var long = position.coords.longitude
+              var lat  = position.coords.latitude;
+              var long = position.coords.longitude;
               console.log("Lat=" + lat + " Long=" + long);
               var metersAwayFromDoes = distance(lat,long);
               console.log("Meters From Does: " + metersAwayFromDoes)
