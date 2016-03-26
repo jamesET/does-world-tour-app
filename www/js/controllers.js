@@ -100,17 +100,21 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
     showLoading();
     auth.sendPassword(email)
       .then(sendComplete,sendFailed)
-      .finally(hideLoading)
 
     function sendComplete(response) {
         hideLoading();
-        logger.info('Password sent to email',email,'Forgot Password');
+        logger.info('Please check your email','','Password Sent');
     }
+
+    function sendFailed() {
+        hideLoading();
+    }
+
   }
 
   function showLoading() {
     $ionicLoading.show({
-      template: '<h1>Emailing password.  Please wait ...</h1>'
+      template: '<h1>Emailing password.  Please wait ...</h1><ion-spinner></ion-spinner'
     });
   }
 
