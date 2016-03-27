@@ -6,7 +6,11 @@
     <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="selectedUser.name" ng-disabled="true" required="true" placeholder="you@yourmail.com">
+          <input type="text" ng-model="selectedUser.name" ng-disabled="true" required="true">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="selectedUser.email" ng-disabled="true" required="true">
         </label>
         <ion-radio ng-model="selectedUser.role" ng-value="'CUSTOMER'">Customer</ion-radio>
         <ion-radio ng-model="selectedUser.role" ng-value="'ADMIN'">Admin</ion-radio>

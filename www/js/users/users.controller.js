@@ -54,7 +54,8 @@
           $scope.selectedUser = {
             id : user.id,
             name : user.name,
-            role : user.role
+            role : user.role,
+            email: user.email
           };
           $scope.modal.show();
         }
