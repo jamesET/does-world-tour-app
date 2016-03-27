@@ -64,6 +64,15 @@ $shots-bg:      '../img/shots.jpg';
   background-color: transparent !important;
 }
 
+.item.activity-finished-list {
+  border-color: white;
+  border-width: 5px;
+  background-color: #ffc900;
+  color: black;
+  overflow: visible;
+  white-space: normal;
+}
+
 .start-font {
     color:  #ffffb3;
     font-size: 2.3em;
@@ -98,7 +107,6 @@ $shots-bg:      '../img/shots.jpg';
     color: #ffffb3;
     font-weight: bold;
 }
-
 
 #myProgress {
   position: relative;

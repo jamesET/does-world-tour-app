@@ -49,6 +49,14 @@ $dark:                            #444 !default;
 .item .item-content {
   background-color: transparent !important; }
 
+.item.activity-finished-list {
+  border-color: white;
+  border-width: 5px;
+  background-color: #ffc900;
+  color: black;
+  overflow: visible;
+  white-space: normal; }
+
 .start-font {
   color: #ffffb3;
   font-size: 2.3em;

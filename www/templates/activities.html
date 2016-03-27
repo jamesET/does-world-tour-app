@@ -7,7 +7,11 @@
     </ion-refresher>
 
     <ion-list class="list">
-        <ion-item class="item-text-wrap item-dark" ng-repeat="activity in activities track by activity.id">
+        <ion-item ng-repeat="activity in activities track by activity.id"
+          ng-class="{
+            'item-text-wrap item-dark' : (activity.listProgressPct <= 99.9),
+            'item-text-wrap activity-finished-list' : (activity.listProgressPct >= 100)
+          }">
           <div class="row">
           <div class="col col-60">
                 <ul>
@@ -22,6 +26,11 @@
                   <li class="small-text">by {{activity.beer.brewery}}</li>
               </ul>
           </div>
+        </div>
+        <div class="row">
+            <span ng-show="activity.listProgressPct >= 100">
+              <h1><i class="icon ion-speakerphone"></i>&nbsp;Finished List #{{activity.listNbr}}!</h1>
+            </span>
         </div>
         </ion-item>
     </ion-list>
