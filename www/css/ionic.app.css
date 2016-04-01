@@ -23,6 +23,12 @@ $dark:                            #444 !default;
 .main-bg {
   background-color: #C41E3A; }
 
+.has-errors {
+  border-bottom: 3px solid #B83E2C; }
+
+.no-errors {
+  border-bottom: 3px solid green; }
+
 .item.item-beer {
   border-color: #111;
   background-color: white;

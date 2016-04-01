@@ -33,6 +33,13 @@ $shots-bg:      '../img/shots.jpg';
   background-color: $cardinal;
 }
 
+.has-errors {
+  border-bottom: 3px solid #B83E2C;
+}
+
+.no-errors {
+  border-bottom: 3px solid green;
+}
 
 .item.item-beer {
   border-color: #111;

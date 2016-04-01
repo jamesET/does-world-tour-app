@@ -1,42 +1,49 @@
 <ion-view view-title="Join">
-  <ion-header-bar>
+  <ion-header-bar class="bar">
     <h1 class="title">Join Beer Tour</h1>
-    <div class="buttons">
       <button class="button button-clear" ng-click="back()">Cancel</button>
-    </div>
   </ion-header-bar>
 
-  <ion-content>
-    <form novalidate="novalidate" ng-submit="join()">
-    <div class="list">
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">Email</span>
-      <input type="email" ng-model="acctData.email" required="required" placeholder="you@yourmail.com">
-    </label>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">Password</span>
-      <input type="password" ng-model="acctData.password" required="required" placeholder="not set">
-    </label>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">Re-enter password</span>
-      <input type="password" ng-model="acctData.password2" required="required" placeholder="not set">
-    </label>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">First and Last Name</span>
-      <input type="text" ng-model="acctData.name" required="required" placeholder="not set">
-    </label>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">Nickname</span>
+  <ion-content class="has-header" scroll="true" overflow-scroll="false">
+    <form name="joinForm">
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label ng-class="{ 'has-errors':joinForm.email.$invalid,'no-errors':joinForm.email.$valid}">Email</ion-label>
+      <input type="email" name="email" ng-model="acctData.email" required="required" placeholder="you@yourmail.com">
+    </ion-input>
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label ng-class="{ 'has-errors':joinForm.password.$invalid,'no-errors':joinForm.password.$valid}">Password</ion-label>
+      <input type="password" name="password" ng-model="acctData.password" required="required" placeholder="not set">
+    </ion-input>
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label
+        ng-class="{ 'has-errors':joinForm.password2.$invalid,'no-errors':joinForm.password2.$valid}">
+        Re-enter password
+      </ion-label>
+      <input type="password" name="password2" ng-model="acctData.password2" required="required" placeholder="not set">
+    </ion-input>
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label
+        ng-class="{ 'has-errors':joinForm.name.$invalid,'no-errors':joinForm.name.$valid}">
+        First and Last Name
+      </ion-label>
+      <input type="text" name="name" ng-model="acctData.name" required="required" placeholder="not set">
+    </ion-input>
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label class="input-label">Nickname</ion-label>
       <input type="text" ng-model="acctData.nickName" placeholder="not set">
-    </label>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">How many lists have you already finished?</span>
-      <input type="text" ng-model="acctData.listNbr" placeholder="0">
-    </label>
-    <label class="item">
-      <button class="button button-block button-positive" type="submit">Submit</button>
-    </label>
-    </div>
+    </ion-input>
+    <ion-input class="item item-input item-stacked-label">
+      <ion-label
+        ng-class="{ 'has-errors':joinForm.listNbr.$invalid,'no-errors':joinForm.listNbr.$valid}">
+        How many lists have you already finished? (Optional)
+      </ion-label>
+      <input type="number" name="listNbr" ng-model="acctData.listNbr" placeholder="0">
+    </ion-input>
+    <button
+      class="button button-block button-positive"
+      ng-disabled="joinForm.$invalid"
+      ng-click="join()"
+      type="submit">Submit</button>
   </form>
 
     <div class="row">
