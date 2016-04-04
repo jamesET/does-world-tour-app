@@ -9,28 +9,49 @@
     <ion-list class="list">
         <ion-item ng-repeat="activity in activities track by activity.id"
           ng-class="{
-            'item-text-wrap item-dark' : (activity.listProgressPct <= 99.9),
-            'item-text-wrap activity-finished-list' : (activity.listProgressPct >= 100)
+            'item-text-wrap item-activity-news' : activity.activityType == 'News',
+            'item-text-wrap item-activity-beer' : activity.activityType == 'Beer',
+            'item-text-wrap activity-finished-list' : activity.activityType == 'FinishBeerList'
           }">
-          <div class="row">
+          <div class="row" ng-show="activity.activityType == 'Beer'">
           <div class="col col-60">
                 <ul>
-                  <li><b>{{activity.name}}</b></li>
-                  <li class="small-text"> {{activity.time | date: 'hh:mm a EEE, MMM d, yyyy' }}</li>
-                  <li class="small-text">{{activity.listProgressPct | number:0}}% through list #{{activity.listNbr}}</li>
+                  <li><b>{{::activity.name}}</b></li>
+                  <li class="small-text">{{::activity.time | date: 'hh:mm a EEE, MMM d, yyyy' }}</li>
+                  <li class="small-text">{{::activity.listProgressPct | number:0}}% through list #{{::activity.listNbr}}</li>
                 </ul>
           </div>
           <div class="col col-40">
               <ul>
-                  <li><b>{{activity.beer.name}}</b></li>
-                  <li class="small-text">by {{activity.beer.brewery}}</li>
+                  <li><b>{{::activity.beer.name}}</b></li>
+                  <li class="small-text">by {{::activity.beer.brewery}}</li>
               </ul>
           </div>
+          </div>
+        <div class="row" ng-show="activity.activityType == 'News'">
+            <div class="col col-10 text-center">
+              <h1><i class="icon ion-speakerphone"></i></h1>
+            </div>
+            <div class="col col-90">
+              <ul>
+                <li>{{::activity.messageHtml}}</li>
+                <li>&nbsp;</li>
+                <li class="small-text text-right">-{{::activity.name}}</li>
+                <li class="small-text text-right">{{::activity.time | date: 'EEE, hh:mm a'}}</li>
+              </ul>
+            </div>
         </div>
-        <div class="row">
-            <span ng-show="activity.listProgressPct >= 100">
-              <h1><i class="icon ion-speakerphone"></i>&nbsp;Finished List #{{activity.listNbr}}!</h1>
-            </span>
+        <div class="row text-center" ng-show="activity.activityType == 'FinishBeerList'">
+            <div class="col col-10 text-center">
+              <h1><i class="icon ion-speakerphone"></i></h1>
+            </div>
+            <div class="col col-90">
+              <ul>
+                <li> <h1>{{::activity.name}}</h1> </li>
+                <li> <b>{{::activity.messageHtml}}</b> </li>
+                <li class="small-text"> {{::activity.time | date: 'hh:mm a EEE, MMM d, yyyy'}} </li>
+              </ul>
+            </div>
         </div>
         </ion-item>
     </ion-list>
@@ -41,4 +62,34 @@
    </ion-infinite-scroll>
 
   </ion-content>
+
+  <ion-footer-bar class="bar-fellowship-feed">
+    <div class="button-bar">
+        <button
+          class="button button-outline"
+          ng-class="{
+            'active': activeFilter == 'none'
+          }"
+          ng-click="noFilter()">
+          <i class="ion-ios-people button-icon"></i>
+        </button>
+        <button
+          class="button button-outline"
+          ng-class="{
+            'active': activeFilter == 'me'
+          }"
+          ng-click="meFilter()">
+          <i class="ion-person"></i>
+        </button>
+        <button
+          class="button button-outline"
+          ng-class="{
+            'active': activeFilter == 'news'
+          }"
+          ng-click="announceFilter()">
+          <i class="ion-speakerphone"></i>
+        </button>
+    </div>
+  </ion-footer-bar>
+
 </ion-view>

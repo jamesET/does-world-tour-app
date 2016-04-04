@@ -19,6 +19,11 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 $cardinal:                   #C41E3A !default;
+$cardinal-text:              #ffffb3 !default;
+
+$stable:                      #f8f8f8 !default;
+$light:                       #fff !default;
+$dark:                        #444 !default;
 
 $horn-bg:       '../img/DrinkingHorn.jpg';
 $shots-bg:      '../img/shots.jpg';
@@ -67,8 +72,45 @@ $shots-bg:      '../img/shots.jpg';
   white-space: normal;
 }
 
+.bar.bar-fellowship-feed {
+  border-color: $dark;
+  background-color: $light;
+  background-image: linear-gradient(0deg, #e6b500, #e6b500 50%, transparent 50%);
+  color: $dark; }
+  .bar.bar-fellowship-feed.bar-footer {
+    background-image: linear-gradient(180deg, #e6b500, #e6b500 50%, transparent 50%); }
+
+.bar-fellowship-feed .button {
+  border-color: $dark;
+  background-color: transparent;
+  color: $light; }
+  .bar-fellowship-feed .button.button-outline {
+    font-size: 3em;
+    border-color: transparent;
+    background: transparent;
+    color: $dark; }
+  .bar-fellowship-feed .button.button-outline.activated {
+      color: $dark;
+      background-color: black;
+  }
+  .bar-fellowship-feed .button.button-outline.active {
+      color: $dark;
+      background-color: black;
+      border-color: white;
+  }
+
 .item .item-content {
   background-color: transparent !important;
+}
+
+
+.item.item-activity-beer {
+  border-color: black;
+  border-width: 1px;
+  background-color: #444;
+  color: white;
+  overflow: visible;
+  white-space: normal;
 }
 
 .item.activity-finished-list {
@@ -79,6 +121,18 @@ $shots-bg:      '../img/shots.jpg';
   overflow: visible;
   white-space: normal;
 }
+
+.item.item-activity-news  {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  border-color: $cardinal-text;
+  border-width: 5px;
+  background-color: $cardinal;
+  color: $cardinal-text;
+  overflow: visible;
+  white-space: normal; }
+  .item.item-activity-news h1 {
+    color: $cardinal-text;
+    font-size: 2em; }
 
 .start-font {
     color:  #ffffb3;

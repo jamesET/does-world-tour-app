@@ -15,13 +15,17 @@
         };
         return service;
 
-        function getPage(page) {
-          var activitiesUrl = ENV.apiEndpoint + 'activities';
+        function getPage(page,userId,newsOnly) {
+          var activitiesUrl = ENV.apiEndpoint + 'activities/v2';
           return $http(
             {
               method: 'GET',
               url : activitiesUrl,
-              params: { page: page}
+              params:
+                { page: page,
+                  userId: userId,
+                  newsOnly: newsOnly
+                }
             })
             .then(getPageComplete)
             .catch(exception.catcher);
