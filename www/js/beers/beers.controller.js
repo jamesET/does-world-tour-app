@@ -9,7 +9,9 @@
   function BeersController ($scope,$ionicModal,BeerService,auth) {
 
     $scope.allBeers = {};
+    $scope.filteredBeers = {};
     $scope.beer = {};
+    $scope.searchText = '';
 
     $scope.closeModal = closeModal;
     $scope.openModal = openModal;
