@@ -8,8 +8,7 @@
   BeersController.$inject = ['$scope','$ionicModal','BeerService','auth'];
   function BeersController ($scope,$ionicModal,BeerService,auth) {
 
-    $scope.allBeers = {};
-    $scope.filteredBeers = {};
+    $scope.allBeers = [];
     $scope.beer = {};
     $scope.searchText = '';
 
