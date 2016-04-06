@@ -48,13 +48,18 @@
                 <div class="col col-66">
                   <span ng-show="listBeer.beer.outOfStock">Temporarily Out of Stock<br></span>
                   <span ng-show="listBeer.beer.discontinued">Discontinued<br></span>
-                  <b>{{::listBeer.beer.name}}</b><br>
-                  {{::listBeer.beer.brewery}}<br>
-                  {{::listBeer.beer.country}} / {{::listBeer.beer.region}}
+                  <ul>
+                    <li><b>{{::listBeer.beer.name}}</b></li>
+                    <li class="small-text">by {{::listBeer.beer.brewery}}</li>
+                    <li class="small-text">{{::listBeer.beer.country}} / {{::listBeer.beer.region}}</li>
+                  <ul>
                 </div>
-                <div class="col col-33">{{::listBeer.beer.style}}<br>
-                  {{::listBeer.beer.abv}}% abv<br>
-                  {{::listBeer.beer.oz}} oz
+                <div class="col col-33">
+                  <ul>
+                    <li>{{::listBeer.beer.style}}</li>
+                    <li class="small-text">{{::listBeer.beer.abv}}% abv</li>
+                    <li class="small-text">{{::listBeer.beer.oz}} oz</li>
+                  </ul>
                 </div>
             </div>
             <ion-option-button
