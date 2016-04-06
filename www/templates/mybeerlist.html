@@ -36,6 +36,7 @@
           </ion-item>
           <ion-item
             ng-repeat="listBeer in group.beers track by listBeer.id"
+            ng-click="swipeHint()"
             ng-show="isGroupShown(group)"
             ng-class="{
               'item-beer item-text-wrap' : true,

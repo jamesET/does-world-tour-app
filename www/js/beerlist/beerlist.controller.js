@@ -18,6 +18,7 @@
         $scope.isGroupShown = isGroupShown;
         $scope.getGroupedBeerList = getGroupedBeerList;
         $scope.showBeer = showBeer;
+        $scope.swipeHint = swipeHint;
         vm.ifInRangeOfDoes = ifInRangeOfDoes;
         vm.isAtDoes = false;
 
@@ -48,6 +49,10 @@
               .finally(function(){
                     $scope.$broadcast('scroll.refreshComplete');
               });
+        }
+
+        function swipeHint() {
+            logger.info('','','swipe left to drink');
         }
 
         function showBeer(beer) {
