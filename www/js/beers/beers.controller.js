@@ -5,8 +5,8 @@
       .module('app.beers')
       .controller('BeersController', BeersController );
 
-  BeersController.$inject = ['$scope','$ionicModal','BeerService','auth'];
-  function BeersController ($scope,$ionicModal,BeerService,auth) {
+  BeersController.$inject = ['$scope','$ionicModal','$ionicScrollDelegate','BeerService','auth'];
+  function BeersController ($scope,$ionicModal,$ionicScrollDelegate,BeerService,auth) {
 
     $scope.allBeers = [];
     $scope.beer = {};
@@ -17,6 +17,7 @@
     $scope.refresh = refresh;
     $scope.save = save;
     $scope.showBeer = showBeer;
+    $scope.onSearchChange = onSearchChange;
 
     activate();
 
@@ -95,6 +96,11 @@
 
     function closeModal() {
         $scope.modal.hide();
+    }
+
+
+    function onSearchChange() {
+        $ionicScrollDelegate.scrollTop();
     }
 
   }
