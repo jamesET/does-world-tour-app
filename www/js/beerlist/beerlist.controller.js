@@ -5,10 +5,10 @@
         .module('app.beerlists')
         .controller('BeerListController', BeerListController);
 
-    BeerListController.$inject = ['$scope','BeerListService','logger','$cordovaGeolocation'];
+    BeerListController.$inject = ['$scope','BeerListService','logger','$cordovaGeolocation','$ionicLoading','$ionicListDelegate'];
 
     /* @ngInject */
-    function BeerListController($scope,BeerListService,logger,$cordovaGeolocation) {
+    function BeerListController($scope,BeerListService,logger,$cordovaGeolocation,$ionicLoading,$ionicListDelegate) {
         var vm = this;
         $scope.myBeerList = {};
         $scope.groupedList = [];
@@ -20,6 +20,9 @@
         $scope.showBeer = showBeer;
         $scope.swipeHint = swipeHint;
         vm.ifInRangeOfDoes = ifInRangeOfDoes;
+        $scope.isWaiting = isWaiting;
+        vm.setWaiting = setWaiting;
+        vm.waiting = false;
         vm.isAtDoes = false;
 
         activate();
@@ -38,6 +41,14 @@
           if (Number.prototype.toDegrees === undefined) {
             Number.prototype.toDegrees = function() { return this * 180 / Math.PI; };
           }
+        }
+
+        function setWaiting(wait) {
+          vm.waiting = wait;
+        }
+
+        function isWaiting() {
+          return vm.waiting;
         }
 
         function refresh() {
@@ -60,9 +71,14 @@
         }
 
         function drinkBeer(listId, countryGroup, listBeer) {
+          setWaiting(true);
 
           ifInRangeOfDoes()
-            .then(processDrink,locationUnavailable);
+            .then(processDrink,locationUnavailable)
+            .finally(function() {
+              setWaiting(false);
+              $ionicListDelegate.closeOptionButtons();
+            });
 
           function processDrink() {
             //vm.isAtDoes = true;  // just for testing
@@ -75,7 +91,7 @@
                     $scope.myBeerList.listProgressPct =
                       updateProgress($scope.myBeerList.numberOrderedOnList,
                         $scope.myBeerList.totalBeersOnList);
-                  });
+                });
             } else {
               logger.info('You must be at Doe\'s Bentonville to drink','','Not at Doe\'s');
             }
@@ -88,13 +104,15 @@
         }
 
         function ifInRangeOfDoes() {
+          $ionicLoading.show({template:'Checking Location'});
           var posOptions = {
               timeout: 10000,
               enableHighAccuracy: false,
               maximumAge: (2*60*1000) };
             return $cordovaGeolocation
               .getCurrentPosition(posOptions)
-              .then(positionFound,positionError);
+              .then(positionFound,positionError)
+              .finally(function(){ $ionicLoading.hide(); });
 
             function positionFound(position) {
               var lat  = position.coords.latitude;

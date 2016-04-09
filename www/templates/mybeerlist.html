@@ -64,6 +64,7 @@
             </div>
             <ion-option-button
               class="button-positive button-large"
+              ng-disabled="isWaiting()"
               ng-click="drinkBeer(myBeerList.id,group,listBeer)">
               Drink<i class="icon ion-beer padding"></i>
               </ion-option-button>
