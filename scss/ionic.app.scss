@@ -186,6 +186,22 @@ $shots-bg:      '../img/shots.jpg';
   border-radius: 1.5em;
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+.blink {
+  animation: blink 0.5s step-start 0s 3;
+  -webkit-animation: blink 1s step-start 0s 2;
+}
+
+
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";

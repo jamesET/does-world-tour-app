@@ -1,18 +1,18 @@
 <ion-view view-title="World of Beer Tour">
-  <ion-content class="main-bg">
+  <ion-content class="main-bg" delegate-handle="beer-list">
 
     <div class="col text-center beer-list-header">
-        <ul>
-          <li>{{myBeerList.user.name}}</li>
-          <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate | date: 'MMM d, yyyy'}}</li>
-          <li>Completed {{myBeerList.numberOrderedOnList}} of {{myBeerList.totalBeersOnList}}
-            <span ng-show="myBeerList.numberNotConfirmed > 0">
-              ({{myBeerList.numberNotConfirmed}} pending)</span>
-          </li>
-        </ul>
-    </div>
+     <ul>
+       <li>{{myBeerList.user.name}}</li>
+       <li>List #{{myBeerList.listNumber}} started {{myBeerList.startDate | date: 'MMM d, yyyy'}}</li>
+       <li>Completed {{myBeerList.numberOrderedOnList}} of {{myBeerList.totalBeersOnList}}
+         <span ng-show="myBeerList.numberNotConfirmed > 0">
+           ({{myBeerList.numberNotConfirmed}} pending)</span>
+       </li>
+     </ul>
+   </div>
 
-    <p>
+   <p>
     <div class="col text-center" ng-show="myBeerList.numberOrderedOnList > 0">
       <div id="myProgress">
           <div id="myProgressBar" style="width: {{myBeerList.listProgressPct}}%">
@@ -28,6 +28,7 @@
         pulling-text="Pull to refresh..."
         on-refresh="refresh()">
       </ion-refresher>
+
       <ion-list can-swipe="true">
         <div ng-repeat="group in groupedList track by group.country">
           <ion-item class="item-text-wrap item-dark" ng-click=toggleGroup(group) ng-class="{active: isGroupShown(group)}">
@@ -35,6 +36,7 @@
             {{group.country}}
           </ion-item>
           <ion-item
+            id="listBeer-{{listBeer.id}}"
             ng-repeat="listBeer in group.beers track by listBeer.id"
             ng-click="swipeHint()"
             ng-show="isGroupShown(group)"
@@ -71,7 +73,13 @@
         </ion-item>
       </div>
       </ion-list>
-
-
   </ion-content>
+
+  <ion-footer-bar class="bar bar-footer item-input-inset">
+    <button class="button button-dark button-block button-outline"
+      ng-click="randomBeer()">
+      Pick One for Me <i class="icon ion-shuffle"></i>
+    </button>
+  </ion-footer-bar>
+
 </ion-view>

@@ -30,6 +30,10 @@ $dark:                            #444 !default;
   border-bottom: 3px solid green; }
 
 .item.item-beer {
+  transition: opacity .3s linear;
+  -moz-transition: opacity .3s linear;
+  -webkit-transition: opacity .3s linear;
+  opacity: 1;
   border-color: #111;
   background-color: white;
   color: black;
@@ -155,6 +159,18 @@ $dark:                            #444 !default;
   height: 100%;
   background-color: #499745;
   border-radius: 1.5em; }
+
+@keyframes blink {
+  50% {
+    opacity: 0.0; } }
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0; } }
+
+.blink {
+  animation: blink 0.5s step-start 0s 3;
+  -webkit-animation: blink 1s step-start 0s 2; }
 
 /*!
   Ionicons, v2.0.1

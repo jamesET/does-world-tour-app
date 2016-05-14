@@ -5,10 +5,12 @@
         .module('app.beerlists')
         .controller('BeerListController', BeerListController);
 
-    BeerListController.$inject = ['$scope','BeerListService','logger','$cordovaGeolocation','$ionicLoading','$ionicListDelegate'];
+    BeerListController.$inject = ['$scope','BeerListService','logger','$cordovaGeolocation',
+        '$ionicLoading','$ionicListDelegate','$ionicScrollDelegate', '$ionicPosition', '$timeout'];
 
     /* @ngInject */
-    function BeerListController($scope,BeerListService,logger,$cordovaGeolocation,$ionicLoading,$ionicListDelegate) {
+    function BeerListController($scope,BeerListService,logger,$cordovaGeolocation,
+        $ionicLoading,$ionicListDelegate, $ionicScrollDelegate, $ionicPosition, $timeout) {
         var vm = this;
         $scope.myBeerList = {};
         $scope.groupedList = [];
@@ -19,6 +21,7 @@
         $scope.getGroupedBeerList = getGroupedBeerList;
         $scope.showBeer = showBeer;
         $scope.swipeHint = swipeHint;
+        $scope.randomBeer = randomBeer;
         vm.ifInRangeOfDoes = ifInRangeOfDoes;
         $scope.isWaiting = isWaiting;
         vm.setWaiting = setWaiting;
@@ -195,6 +198,7 @@
 
         function toggleGroup(group) {
           group.show = !group.show;
+          $ionicScrollDelegate.resize();
         }
 
         function isGroupShown(group) {
@@ -230,6 +234,37 @@
           }
         }
 
+        function randomBeer() {
+          // Random Country selection
+          var numCountries = $scope.groupedList.length;
+          var iRndCountry = Math.floor((Math.random() * numCountries));
+          var rndCountry = $scope.groupedList[iRndCountry];
+          console.log("Random Country: " + rndCountry.country);
+
+          // Random Beer selection
+          var numBeers = rndCountry.beers.length;
+          var iRndBeer = Math.floor((Math.random() * numBeers));
+          var rndBeer = rndCountry.beers[iRndBeer];
+          console.log("Random Beer: " + rndBeer.beer.name);
+
+          // Navigate to beer in list
+          rndCountry.show = true;
+          var beerId = "listBeer-" + rndBeer.id;
+          $ionicScrollDelegate.resize()
+            .then(function() {
+              var beerEl = angular.element(document.getElementById(beerId));
+              var beerPosition = $ionicPosition.position(beerEl);
+              $ionicScrollDelegate.$getByHandle('beer-list').scrollTo(beerPosition.left, beerPosition.top, true);
+              blink(beerEl);
+            });
+        }
+
+        function blink(el) {
+            el.addClass('blink');
+            $timeout(function() {
+                el.removeClass('blink');
+            },2000);
+        }
 
     }
 })();
