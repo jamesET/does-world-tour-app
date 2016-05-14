@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="club.mondoes.does-world-tour-app" version="1.0.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="club.mondoes.does-world-tour-app" version="1.0.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Beer Tour</name>
   <description>
 	Mobile App for the patrons of Doe&apos;s Bentonville and the World Tour of Beer.  Track your progress and have your list with you all the time.
