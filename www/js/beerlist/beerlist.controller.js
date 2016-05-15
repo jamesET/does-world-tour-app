@@ -22,6 +22,7 @@
         $scope.showBeer = showBeer;
         $scope.swipeHint = swipeHint;
         $scope.randomBeer = randomBeer;
+        $scope.resetView = resetView;
         vm.ifInRangeOfDoes = ifInRangeOfDoes;
         $scope.isWaiting = isWaiting;
         vm.setWaiting = setWaiting;
@@ -266,6 +267,13 @@
             $timeout(function() {
                 el.removeClass('blink');
             },2000);
+        }
+
+        function resetView() {
+            for (var i=0; i < $scope.groupedList.length; i++) {
+                $scope.groupedList[i].show = false;
+            }
+            $ionicScrollDelegate.scrollTop();
         }
 
     }
