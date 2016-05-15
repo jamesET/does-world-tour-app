@@ -150,8 +150,8 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
         return;
     }
 
-    if (newUser.numListsCompleted < 1 || newUser.numListsCompleted > 30) {
-      $scope.errorMessage = 'Lists finished must be between 1 and 30';
+    if (newUser.numListsCompleted < 0 || newUser.numListsCompleted > 30) {
+      $scope.errorMessage = 'Lists finished must be between 0 and 30';
       return;
     }
 
