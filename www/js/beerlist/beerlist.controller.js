@@ -198,7 +198,9 @@
 
         function toggleGroup(group) {
           group.show = !group.show;
-          $ionicScrollDelegate.resize();
+          setTimeout(function () {
+            $ionicScrollDelegate.resize();
+          },2500);
         }
 
         function isGroupShown(group) {

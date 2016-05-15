@@ -30,10 +30,6 @@ $dark:                            #444 !default;
   border-bottom: 3px solid green; }
 
 .item.item-beer {
-  transition: opacity .3s linear;
-  -moz-transition: opacity .3s linear;
-  -webkit-transition: opacity .3s linear;
-  opacity: 1;
   border-color: #111;
   background-color: white;
   color: black;
