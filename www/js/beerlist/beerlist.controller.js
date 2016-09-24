@@ -111,7 +111,7 @@
           $ionicLoading.show({template:'Checking Location'});
           var posOptions = {
               timeout: 10000,
-              enableHighAccuracy: false,
+              enableHighAccuracy: true,
               maximumAge: (2*60*1000) };
             return $cordovaGeolocation
               .getCurrentPosition(posOptions)
