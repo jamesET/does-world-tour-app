@@ -55,7 +55,7 @@
         function handleNoAuth() {
             event.preventDefault();
             $timeout(
-              function() {logger.warning('<h2>Not logged in</h2>','','');},
+              function() {logger.warning('<h2>New login required</h2>','','');},
               1500
             ).then(
               function() {
