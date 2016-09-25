@@ -23,8 +23,8 @@
         .run(runBlock);
 
 
-    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','APP_EVENTS','auth','logger','$timeout'];
-    function runBlock($ionicPlatform,$rootScope,$state,APP_EVENTS,auth,logger,$timeout) {
+    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','APP_EVENTS','auth','logger','$timeout','$ionicHistory'];
+    function runBlock($ionicPlatform,$rootScope,$state,APP_EVENTS,auth,logger,$timeout,$ionicHistory) {
 
         $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -40,19 +40,15 @@
         }
       });
 
-        $rootScope.$on('$stateChangeStart', function(event,next,nextParams,fromState) {
-          if (!auth.isAuthenticated()) {
-              var whiteList = ['login','start','join','app.beers'];
-              if (whiteList.indexOf(next.name) < 0) {
-                console.log('Not authenticated, redirected to login instead of ' + next.name);
-                event.preventDefault();
-                $state.go('login');
-              }
-          }
-        });
-
         $rootScope.$on(APP_EVENTS.notAuthenticated,handleNoAuth);
         function handleNoAuth() {
+            // Authentication not necessary for some pages
+            var currentState = $ionicHistory.currentStateName();
+            var whiteList = ['login','start','join','app.beers'];
+            if (whiteList.indexOf(currentState) >= 0) {
+              return;
+            }
+
             event.preventDefault();
             $timeout(
               function() {logger.warning('<h2>Login Required</h2>','','');},
@@ -60,7 +56,7 @@
             ).then(
               function() {
                 auth.reset();
-                $state.go('start'); }
+                $state.go('login'); }
             );
         }
 
