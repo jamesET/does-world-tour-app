@@ -20,7 +20,11 @@
         return service;
 
         function set(key,value) {
-          $window.localStorage[key] = value;
+          if (value === null) {
+            remove(key);
+          } else {
+            $window.localStorage[key] = value;
+          }
         }
 
         function get(key,defaultValue) {
@@ -28,7 +32,11 @@
         }
 
         function setObject(key,value) {
-          $window.localStorage[key] = JSON.stringify(value);
+          if (value === null) {
+              remove(key);
+          } else {
+            $window.localStorage[key] = JSON.stringify(value);
+          }
         }
 
         function getObject(key) {
