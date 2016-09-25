@@ -82,7 +82,7 @@
           // if we have a token then we will assume authentication
           // ... the app should clear the token upon processing a 401
           var token = session.getAccessToken();
-          if (token != null && token != 'null') {
+          if (token != null && token.length > 0) {
               return true;
           } else {
             return false;
@@ -101,8 +101,7 @@
         }
 
         function reset() {
-            // Force the app to a logged out state without calling backend
-            session.destroy();
+            session.setAccessToken(null);
         }
 
 
