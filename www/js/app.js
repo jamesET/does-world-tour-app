@@ -23,8 +23,8 @@
         .run(runBlock);
 
 
-    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','AUTH_EVENTS','auth','logger','$timeout'];
-    function runBlock($ionicPlatform,$rootScope,$state,AUTH_EVENTS,auth,logger,$timeout) {
+    runBlock.$inject = ['$ionicPlatform','$rootScope','$state','APP_EVENTS','auth','logger','$timeout'];
+    function runBlock($ionicPlatform,$rootScope,$state,APP_EVENTS,auth,logger,$timeout) {
 
         $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -51,7 +51,7 @@
           }
         });
 
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated,handleNoAuth);
+        $rootScope.$on(APP_EVENTS.notAuthenticated,handleNoAuth);
         function handleNoAuth() {
             event.preventDefault();
             $timeout(
@@ -61,6 +61,17 @@
               function() {
                 auth.logOut();
                 $state.go('start'); }
+            );
+        }
+
+        $rootScope.$on(APP_EVENTS.serverNoResponse,handleNoResponse);
+        function handleNoResponse() {
+            console.log('Handling serverNoResponse');
+            event.preventDefault();
+            //auth.reset();
+            $timeout(
+              function() {logger.warning('<h2>Server not responding</h2>','','');},
+              1500
             );
         }
 

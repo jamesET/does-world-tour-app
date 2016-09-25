@@ -9,8 +9,9 @@
             'blocks.logger',
             'config'
         ])
-        .constant('AUTH_EVENTS', {
+        .constant('APP_EVENTS', {
             notAuthenticated: 'auth-not-authenticated',
-            notAuthorized: 'auth-not-authorized'
+            notAuthorized: 'auth-not-authorized',
+            serverNoResponse: 'server-no-response'
         });
 })();

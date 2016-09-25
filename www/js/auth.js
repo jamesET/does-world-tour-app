@@ -14,6 +14,7 @@
         this.isAuthenticated = isAuthenticated;
         this.isAdmin = isAdmin;
         this.sendPassword = sendPassword;
+        this.reset = reset;
 
         var baseUrl = ENV.apiEndpoint;
         var loginUrl = baseUrl + '/login/';
@@ -56,7 +57,6 @@
           return $http
             .post(logoutUrl)
             .then(logOutComplete)
-            .catch(exception.catcher('Logout failed'));
 
             function logOutComplete() {
                 logger.log('User logged out');
@@ -82,7 +82,7 @@
           // if we have a token then we will assume authentication
           // ... the app should clear the token upon processing a 401
           var token = session.getAccessToken();
-          if (token != null && token.length > 0) {
+          if (token != null && token != 'null') {
               return true;
           } else {
             return false;
@@ -98,6 +98,11 @@
             } else {
               return false;
             }
+        }
+
+        function reset() {
+            // Force the app to a logged out state without calling backend
+            session.destroy();
         }
 
 
