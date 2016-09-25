@@ -55,11 +55,11 @@
         function handleNoAuth() {
             event.preventDefault();
             $timeout(
-              function() {logger.warning('<h2>New login required</h2>','','');},
+              function() {logger.warning('<h2>Login Required</h2>','','');},
               1500
             ).then(
               function() {
-                auth.logOut();
+                auth.reset();
                 $state.go('start'); }
             );
         }
@@ -68,7 +68,6 @@
         function handleNoResponse() {
             console.log('Handling serverNoResponse');
             event.preventDefault();
-            //auth.reset();
             $timeout(
               function() {logger.warning('<h2>Server not responding</h2>','','');},
               1500

@@ -44,7 +44,6 @@
         function setUser(user){
           vm._user = user;
           $localStorage.set('session.user', user);
-          return vm;
         }
 
         function getRole(){
@@ -54,7 +53,6 @@
         function setRole(role){
           vm._role = role;
           $localStorage.set('session.role', role);
-          return vm;
         }
 
         function getEmail(){
@@ -64,7 +62,6 @@
         function setEmail(email){
           vm._email = email;
           $localStorage.set('session.email', email);
-          return vm;
         }
 
         function getPassword(){
@@ -74,7 +71,6 @@
         function setPassword(password){
           vm._password = password;
           $localStorage.set('session.password', password);
-          return vm;
         }
 
         function getAccessToken(){
@@ -84,7 +80,6 @@
         function setAccessToken(token){
           vm._accessToken = token;
           $localStorage.set('session.accessToken', token);
-          return vm;
         }
 
         function getUserData(){
@@ -94,18 +89,13 @@
         function setUserData(userData){
           vm._userData = userData;
           $localStorage.setObject('session.userData', userData);
-          return vm;
         }
 
         /**
          * Destroy session
          */
         function destroy(){
-          vm.setUser(null);
-          vm.setPassword(null);
-          vm.setAccessToken(null);
-          vm.setUserData(null);
-          vm.setRole(null);
+          // nothing to do here anymore
         }
 
     }
