@@ -44,7 +44,7 @@
           if (!auth.isAuthenticated()) {
               var whiteList = ['login','start','join','app.beers'];
               if (whiteList.indexOf(next.name) < 0) {
-                console.log('Not authenticated, redirected to login');
+                console.log('Not authenticated, redirected to login instead of ' + next.name);
                 event.preventDefault();
                 $state.go('login');
               }
@@ -55,13 +55,13 @@
         function handleNoAuth() {
             event.preventDefault();
             $timeout(
-              function() {logger.warning('<h2>Logged out due to inactivity</h2>','','');},
-              1000
+              function() {logger.warning('<h2>Not logged in</h2>','','');},
+              1500
+            ).then(
+              function() {
+                auth.logOut();
+                $state.go('start'); }
             );
-            $timeout(
-              function() { $state.go('login')},
-              1500);
-
         }
 
     }

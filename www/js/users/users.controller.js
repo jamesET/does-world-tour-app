@@ -23,7 +23,6 @@
         activate();
 
         function activate() {
-          refresh();
 
           $ionicModal.fromTemplateUrl('templates/userForm.html', {
               scope: $scope,

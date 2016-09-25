@@ -20,21 +20,38 @@ angular.module('starter.controllers', ['resources','services.user','app.core'])
 
 })
 
-.controller('StartCtrl', function($scope,$state,session) {
+.controller('StartCtrl', function($scope,$state,session,auth) {
+  var vm = this;
+  $scope.login = login;
+  $scope.join = join;
+  $scope.browse = browse;
+
+  activate();
+
+  function activate() {
+
+    $scope.$on('$ionicView.enter', function() {
+      if (auth.isAuthenticated()) {
+        $state.go('app.mybeerlist');
+      }
+    });
+
+  }
 
   // Navigate to the login form
-  $scope.login = function() {
+  function login() {
       $state.go('login');
   };
 
   // Navigate to the signup form
-  $scope.join = function() {
+  function join() {
       $state.go('join');
   };
 
-  $scope.browse = function() {
+  function browse() {
     $state.go('app.beers');
   };
+
 })
 
 .controller('LoginCtrl', function($scope,$state,session,auth,logger,$ionicLoading) {
