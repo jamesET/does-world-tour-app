@@ -19,7 +19,6 @@
         var loginUrl = baseUrl + '/login/';
         var sendPasswordUrl = baseUrl + '/login/sendpass';
         var logoutUrl =  baseUrl + '/logout/';
-        var isAuthenticated = false;
 
         /**
         * Log in
@@ -40,7 +39,6 @@
             .catch( exception.catcher('Login failed') );
 
             function loginSuccess(response, status, headers, config) {
-                isAuthenticated = true;
                 session.setUser(response.data.userId);
                 session.setAccessToken(response.data.token);
                 session.setUserData(response.data.userTO);
@@ -54,7 +52,6 @@
         * @returns {*|Promise}
         */
         function logOut() {
-          isAuthenticated = false;
           session.destroy();
           return $http
             .post(logoutUrl)
@@ -82,11 +79,18 @@
         }
 
         function isAuthenticated() {
-          return isAuthenticated;
+          // if we have a token then we will assume authentication
+          // ... the app should clear the token upon processing a 401
+          var token = session.getAccessToken();
+          if (token != null && token.length > 0) {
+              return true;
+          } else {
+            return false;
+          }
         }
 
         function isAdmin() {
-          if (!isAuthenticated) {
+          if (!isAuthenticated()) {
             return false;
           }
             if (session.getRole() === 'ADMIN') {
