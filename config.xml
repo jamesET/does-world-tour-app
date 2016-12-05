@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="club.mondoes.does-world-tour-app"
-  version="1.0.14"
-  android-versionCode="100140"
-  xmlns="http://www.w3.org/ns/widgets"
-  xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="club.mondoes.does-world-tour-app" version="1.0.14" android-versionCode="100140" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Beer Tour</name>
   <description>
-	Mobile App for the patrons of Doe&apos;s Bentonville and the World Tour of Beer.  Track your progress and have your list with you all the time.
+	Mobile App for the patrons of Doe's Bentonville and the World Tour of Beer.  Track your progress and have your list with you all the time.
     </description>
   <author email="jimmy.e.thomas@gmail.com" href="http://just-james.com/">
       James Thomas
@@ -29,6 +25,7 @@
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
     <icon src="resources/ios/icon/icon-40.png" width="40" height="40"/>
     <icon src="resources/ios/icon/icon-40@2x.png" width="80" height="80"/>
+    <icon src="resources/ios/icon/icon-40@3x.png" width="120" height="120"/>
     <icon src="resources/ios/icon/icon-50.png" width="50" height="50"/>
     <icon src="resources/ios/icon/icon-50@2x.png" width="100" height="100"/>
     <icon src="resources/ios/icon/icon-60.png" width="60" height="60"/>
@@ -38,6 +35,7 @@
     <icon src="resources/ios/icon/icon-72@2x.png" width="144" height="144"/>
     <icon src="resources/ios/icon/icon-76.png" width="76" height="76"/>
     <icon src="resources/ios/icon/icon-76@2x.png" width="152" height="152"/>
+    <icon src="resources/ios/icon/icon-83.5@2x.png" width="167" height="167"/>
     <icon src="resources/ios/icon/icon-small.png" width="29" height="29"/>
     <icon src="resources/ios/icon/icon-small@2x.png" width="58" height="58"/>
     <icon src="resources/ios/icon/icon-small@3x.png" width="87" height="87"/>
@@ -48,6 +46,7 @@
     <splash src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
     <splash src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" height="768"/>
     <splash src="resources/ios/splash/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
+    <splash src="resources/ios/splash/Default-Portrait@~ipadpro.png" width="2048" height="2732"/>
     <splash src="resources/ios/splash/Default-Portrait~ipad.png" width="768" height="1024"/>
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
